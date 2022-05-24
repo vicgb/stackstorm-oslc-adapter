@@ -31,27 +31,21 @@ Dentro de st2-docker-changes habrá dos scripts:
 - rs-init.sh se ejecuta el iniciar el contenedor y permite la creacion del cluster replicaset de MongoDB. Meter este script en la carpeta st2-docker/mongo/rs-init.sh.
 
 
-'''
-
+```
 ./st2-docker/start-st2.sh
-
-'''
+```
 
 - Módulo de monitorización
 
-'''
-
+```
 python3 st2api/monitoring.py
-
-'''
+```
 
 - Graph Manager
 
-'''
-
+```
 flask run
-
-'''
+```
 
 ## Usage
 
