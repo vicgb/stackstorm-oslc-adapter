@@ -1,92 +1,71 @@
 # Stackstorm OSLC Adapter
 
+Trabajo Fin de Master: Design and implementation of a monitoring framework for a DevOps life-cycle based on semantic techniques and the OSLC standard
+
+## Arquitecture
 
 
-## Getting started
+- Stackstorm y Kafka:
 
-To make it easy for you to get started with GitLab, here's a list of recommended next steps.
+Se ha creado un script de bash para la inicialización de un ReplicaSet de MongoDB, añadiendo dos nodos secundarios al despliegue inicial de stackstorm en Docker. Por otro lado se ha incluido en el mismo docker-compose los servicios de zookeeper y kafka
 
-Already a pro? Just edit this README.md and make it your own. Want to make it easy? [Use the template at the bottom](#editing-this-readme)!
+- Módulo de monitorización
 
-## Add your files
+Archivo de Python que utiliza los change_stream de MongoDB para la monitorización activa de Stackstorm
 
-- [ ] [Create](https://docs.gitlab.com/ee/user/project/repository/web_editor.html#create-a-file) or [upload](https://docs.gitlab.com/ee/user/project/repository/web_editor.html#upload-a-file) files
-- [ ] [Add files using the command line](https://docs.gitlab.com/ee/gitlab-basics/add-file.html#add-a-file-using-the-command-line) or push an existing Git repository with the following command:
+- Graph Manager
 
-```
-cd existing_repo
-git remote add origin https://lab.gsi.upm.es/valvarez/stackstorm-oslc-adapter.git
-git branch -M main
-git push -uf origin main
-```
+Servidor flask estructurado con cookiecutter.
 
-## Integrate with your tools
+## Deploy and Test
 
-- [ ] [Set up project integrations](https://lab.gsi.upm.es/valvarez/stackstorm-oslc-adapter/-/settings/integrations)
+Se está trabajando en un script que levante todo el escenario en un solo paso. De momento hay tres procesos que iniciar:
 
-## Collaborate with your team
+- Stackstorm y Kafka:
 
-- [ ] [Invite team members and collaborators](https://docs.gitlab.com/ee/user/project/members/)
-- [ ] [Create a new merge request](https://docs.gitlab.com/ee/user/project/merge_requests/creating_merge_requests.html)
-- [ ] [Automatically close issues from merge requests](https://docs.gitlab.com/ee/user/project/issues/managing_issues.html#closing-issues-automatically)
-- [ ] [Enable merge request approvals](https://docs.gitlab.com/ee/user/project/merge_requests/approvals/)
-- [ ] [Automatically merge when pipeline succeeds](https://docs.gitlab.com/ee/user/project/merge_requests/merge_when_pipeline_succeeds.html)
+Primero hay que clonar el repositorio de Stackstorm para Docker [st2-docker](https://github.com/StackStorm/st2-docker). Una vez clonado, sustituir el docker-compose.yml del repositorio clonado, por el de la carpeta st2-docker-changes/.
 
-## Test and Deploy
+Dentro de st2-docker-changes habrá dos scripts:
 
-Use the built-in continuous integration in GitLab.
+- start-st2.sh se encarga de levantar el escenario formado por un cluster replicaset con un nodo primario y dos secundarios, así como los servicios de zookeeper y kafka. Poner este archivo en la raiz del repo st2-docker recientemente clonado.
+- rs-init.sh se ejecuta el iniciar el contenedor y permite la creacion del cluster replicaset de MongoDB. Meter este script en la carpeta st2-docker/mongo/rs-init.sh.
 
-- [ ] [Get started with GitLab CI/CD](https://docs.gitlab.com/ee/ci/quick_start/index.html)
-- [ ] [Analyze your code for known vulnerabilities with Static Application Security Testing(SAST)](https://docs.gitlab.com/ee/user/application_security/sast/)
-- [ ] [Deploy to Kubernetes, Amazon EC2, or Amazon ECS using Auto Deploy](https://docs.gitlab.com/ee/topics/autodevops/requirements.html)
-- [ ] [Use pull-based deployments for improved Kubernetes management](https://docs.gitlab.com/ee/user/clusters/agent/)
-- [ ] [Set up protected environments](https://docs.gitlab.com/ee/ci/environments/protected_environments.html)
 
-***
+'''
 
-# Editing this README
+./st2-docker/start-st2.sh
 
-When you're ready to make this README your own, just edit this file and use the handy template below (or feel free to structure it however you want - this is just a starting point!).  Thank you to [makeareadme.com](https://www.makeareadme.com/) for this template.
+'''
 
-## Suggestions for a good README
-Every project is different, so consider which of these sections apply to yours. The sections used in the template are suggestions for most open source projects. Also keep in mind that while a README can be too long and detailed, too long is better than too short. If you think your README is too long, consider utilizing another form of documentation rather than cutting out information.
+- Módulo de monitorización
 
-## Name
-Choose a self-explaining name for your project.
+'''
 
-## Description
-Let people know what your project can do specifically. Provide context and add a link to any reference visitors might be unfamiliar with. A list of Features or a Background subsection can also be added here. If there are alternatives to your project, this is a good place to list differentiating factors.
+python3 st2api/monitoring.py
 
-## Badges
-On some READMEs, you may see small images that convey metadata, such as whether or not all the tests are passing for the project. You can use Shields to add some to your README. Many services also have instructions for adding a badge.
+'''
 
-## Visuals
-Depending on what you are making, it can be a good idea to include screenshots or even a video (you'll frequently see GIFs rather than actual videos). Tools like ttygif can help, but check out Asciinema for a more sophisticated method.
+- Graph Manager
 
-## Installation
-Within a particular ecosystem, there may be a common way of installing things, such as using Yarn, NuGet, or Homebrew. However, consider the possibility that whoever is reading your README is a novice and would like more guidance. Listing specific steps helps remove ambiguity and gets people to using your project as quickly as possible. If it only runs in a specific context like a particular programming language version or operating system or has dependencies that have to be installed manually, also add a Requirements subsection.
+'''
+
+flask run
+
+'''
 
 ## Usage
-Use examples liberally, and show the expected output if you can. It's helpful to have inline the smallest example of usage that you can demonstrate, while providing links to more sophisticated examples if they are too long to reasonably include in the README.
 
-## Support
-Tell people where they can go to for help. It can be any combination of an issue tracker, a chat room, an email address, etc.
+Una vez desplegado todo el escenario se podrá acceder a Stackstorm en localhost.
 
-## Roadmap
-If you have ideas for releases in the future, it is a good idea to list them in the README.
+Para interactuar con el graph manager se ha utilizado [Insomnia](https://insomnia.rest/) pero se puede hacer con otros clientes como curl. Todos los endpoints disponibles para recibir HTTP Requests están el /oslcapi/api/views.py. 
+Cada endpoint está asociada a una función determinada
 
-## Contributing
-State if you are open to contributions and what your requirements are for accepting them.
+## Auth token for Stackstorm
 
-For people who want to make changes to your project, it's helpful to have some documentation on how to get started. Perhaps there is a script that they should run or some environment variables that they need to set. Make these steps explicit. These instructions could also be useful to your future self.
+- [Obtain an auth token for Stackstorm](https://docs.stackstorm.com/authentication.html)
 
-You can also document commands to lint the code or run tests. These steps help to ensure high code quality and reduce the likelihood that the changes inadvertently break something. Having instructions for running tests is especially helpful if it requires external setup, such as starting a Selenium server for testing in a browser.
 
-## Authors and acknowledgment
-Show your appreciation to those who have contributed to the project.
 
-## License
-For open source projects, say how it is licensed.
+## Project framework
 
-## Project status
-If you have run out of energy or time for your project, put a note at the top of the README saying that development has slowed down or stopped completely. Someone may choose to fork your project or volunteer to step in as a maintainer or owner, allowing your project to keep going. You can also make an explicit request for maintainers.
+Este trabajo se enmarca dentro del proyecto [SmartDevOps](https://smartdevops.gsi.upm.es) y pretende servir de demo para un caso de uso concreto. SmartDevOps desarrolla de manera mucho mas global los conceptos planteados en este trabajo.
