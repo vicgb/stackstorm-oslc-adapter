@@ -68,9 +68,9 @@ Headers:
 
 ## Links of interest
 
-- [OSLC] (https://open-services.net/resources/oslc-primer/)
+- [OSLC-PRIMER](https://open-services.net/resources/oslc-primer/)
 - [OSLC-CORE](https://archive.open-services.net/bin/view/Main/OslcCoreSpecification)
-- [RDF] (https://www.w3.org/TR/rdf-primer/)
+- [RDF](https://www.w3.org/TR/rdf-primer/)
 - [Stackstorm-API](https://api.stackstorm.com/)
 - [SmartDevOps](https://smartdevops.gsi.upm.es)
 - [GSI](https://gsi.upm.es)
