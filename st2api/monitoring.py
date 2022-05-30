@@ -37,7 +37,6 @@ def get_mongo_rules():
 
 def stream_mongo():
 
-    print("Monitoring initialize")
     client = pymongo.MongoClient("mongodb://fd6bd9c7f88c:27017", replicaset='rs')
     headers = headers
     # db: st2
