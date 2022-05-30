@@ -10,8 +10,7 @@ OSLC = Namespace('http://open-services.net/ns/core#')
 OSLC_CM = Namespace('http://open-services.net/ns/cm#')
 OSLC_ACTION = Namespace('http://open-services.net/ns/actions#')
 
-# TODO: Modelar reglas st2. De momento URI falsa.
-ST2 = Namespace('http://st2-prueba.net/ns/core#')
+ST2 = Namespace('http://localhost:5001/ns/st2_oslc#')
 
 
 base_url = 'http://localhost:5000'
@@ -46,37 +45,40 @@ class OSLCStore:
     def remove_resource(self,service_provider, element):
         resource = OSLCResource(service_provider, element, len(service_provider.oslc_resources)-1)
         service_provider.oslc_resources.pop(len(service_provider.oslc_resources)-1)
+        
         return resource
 
     
-    def replace_resource(self, service_provider, element):
-        deleted_resource = self.remove_resource(service_provider, element)
-        updated_resource = self.add_resource(service_provider, element)
-        return updated_resource
+    def replace_resource(self, service_provider, rule, pos):
+        resource = OSLCResource(service_provider, rule, pos+1)
+        
+        service_provider.oslc_resources.pop(pos)
+        service_provider.oslc_resources.insert(pos, resource)
     
+        
+        return resource
     
     def update_resources(self,service_provider, rule_id, action):
         rules_list = []
         for rule in get_all_rules():
             rules_list.append(rule['id'])
 
-            if action.__contains__('update'):
-                for rule in get_all_rules():
-                    rules_list.append(rule['id'])
-                    if rule_id == rule['id']:
-                        self.replace_resource(service_provider, rule)
-
-            if action.__contains__('delete'):
-                for oslc_resource in service_provider.oslc_resources:
-                    if oslc_resource.element['id'] not in rules_list:
-                        service_provider.oslc_resources.remove(oslc_resource)
-                        #oslc_resource.rdf.add((oslc_resource.uri, RDFS.comment, Literal('Deleted')))
-            
-            #De momento no se van a crear reglas en la interfaz de Stackstorm, por tiempo.
+        if action.__contains__('update'):
+            for rule in get_all_rules():
+                if rule_id == rule['id']:
+                    pos = rules_list.index(rule['id'])
+                    self.replace_resource(service_provider, rule, pos)
+                        
+        if action.__contains__('delete'):
+            for oslc_resource in service_provider.oslc_resources:
+                if oslc_resource.element['id'] not in rules_list:
+                    service_provider.oslc_resources.remove(oslc_resource)
+                        
+        if action.__contains__('creation'):
+            for oslc_resource in service_provider.oslc_resources:
+                if oslc_resource.element['id'] not in rules_list:
+                    service_provider.oslc_resources.add(oslc_resource)
         
-        else:
-            log.warning("There is a problem updating the resources.")
-       
             
         
         log.warning('Resources updated!')

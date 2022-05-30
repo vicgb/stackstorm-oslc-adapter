@@ -6,13 +6,6 @@ from oslcapi.api.resources import *
 from oslcapi.api.schemas import UserSchema
 from oslcapi.api.resources.resourceOSLC import OSLCAction, ST2Logs
 
-# TODO:
-# - Definir mas datos en el grafo de eventos. Definir grafos del tipo OSLC Event
-# - Definir bien los grafos de las acciones. Preguntar Alvaro-Guillermo.
-# - Creation y Deletion Event en ST2Logs
-# - Meter el creation en el update_resources
-# - Añadir tipo de cambio en TRS (/TrackedResourceSet). Ahora guarda cambios en el update. Se guarda directamente en el ST2Logs
-# - Revisar todos los grafos. Se reciben acciones y se envian eventos desde el adaptador.
 
 blueprint = Blueprint("api", __name__, url_prefix="/service")
 api = Api(blueprint)
@@ -37,10 +30,6 @@ api.add_resource(OSLCAction, "/action", endpoint="oslc_action")
 api.add_resource(ST2Logs, "/ST2Logs", endpoint="logs_endpoint")
 
 
-
-
-
-api.add_resource(EventReceived, "/event/payload")
 
 @blueprint.before_app_first_request
 def register_views():

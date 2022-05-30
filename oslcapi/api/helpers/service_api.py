@@ -15,7 +15,7 @@ OSLC_CM = Namespace('http://open-services.net/ns/cm#')
 ST2 = Namespace('http://localhost:5001/ns/st2_oslc#')
 
 
-client = Client(api_url='http://localhost/api', token="250e8b3fc80b4305b1aabac1672a50e2", api_version='v1')
+
 
 token = os.getenv("TOKEN")
 st2_api_url = os.getenv("API_URL")
@@ -113,12 +113,10 @@ def module_to_service_provider(module, service_provider):
     service_provider.rdf.add((service_provider.uri, DCTERMS.created, Literal(datetime.now())))
     service_provider.rdf.add((service_provider.uri, OSLC.details, Literal(st2_api_url)))
 
-# TODO: Las actions habrá que modelarlas con OSLC Actions. 
 def rules_to_oslc_resource(element, resource):
      
-    resource.rdf.add((resource.uri, ST2.ruleId, Literal(element['id'], datatype=RDF.XMLLiteral)))
+    resource.rdf.add((resource.uri, ST2.ruleId, Literal(element['id'])))
     resource.rdf.add((resource.uri, ST2.ruleTitle, Literal(element['name'], datatype=RDF.XMLLiteral)))
-    #resource.rdf.add((resource.uri, DCTERMS.temporal, Literal(element['tags'])))
     resource.rdf.add((resource.uri, ST2.ruleStatus, Literal(element['enabled'])))
     resource.rdf.add((resource.uri, ST2.ruleRef, Literal(element["ref"])))
     resource.rdf.add((resource.uri, ST2.rulePack, Literal(element["pack"])))

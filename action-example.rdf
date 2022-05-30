@@ -1,0 +1,50 @@
+##### CREATE #####
+<?xml version="1.0" encoding="utf-8"?>
+<rdf:RDF
+	xmlns:dcterms="http://purl.org/dc/terms/"
+	xmlns:ns1="http://open-services.net/ns/core#"
+	xmlns:ns2="http://localhost:5001/ns/st2_oslc#"
+	xmlns:ns3="http://open-services.net/ns/cm#"
+	xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+>
+	<rdf:Description rdf:type="http://localhost:5000/service/CreateRuleAction">
+		<rdf:type rdf:resource="http://open-services.net/ns/cm#ChangeRequest"/>
+		<ns2:ruleId></ns2:ruleId>
+		<ns2:ruleTitle>creada_manual2</ns2:ruleTitle>
+		<ns2:ruleStatus rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</ns2:ruleStatus>
+		<ns2:triggerRef>core.st2.generic.notifytrigger</ns2:triggerRef>
+		<ns2:triggerType>core.st2.generic.notifytrigger</ns2:triggerType>
+		<ns2:actionRef>chatops.notify</ns2:actionRef>
+	</rdf:Description>
+</rdf:RDF>
+
+##### UPDATE: Activate/Deactivate a rule #####
+
+<?xml version="1.0" encoding="utf-8"?>
+<rdf:RDF
+	xmlns:ns1="http://open-services.net/ns/core#"
+	xmlns:ns2="http://localhost:5001/ns/st2_oslc#"
+	xmlns:ns3="http://open-services.net/ns/cm#"
+	xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+>
+	<rdf:Description rdf:type="http://localhost:5000/service/UpdateRuleAction">
+		<rdf:type rdf:resource="http://open-services.net/ns/cm#ChangeRequest"/>
+		<ns2:ruleId>RULE_ID</ns2:ruleId>
+	</rdf:Description>
+</rdf:RDF>
+
+
+##### DELETE: Activate/Deactivate a rule #####
+
+<?xml version="1.0" encoding="utf-8"?>
+<rdf:RDF
+	xmlns:ns1="http://open-services.net/ns/core#"
+	xmlns:ns2="http://localhost:5001/ns/st2_oslc#"
+	xmlns:ns3="http://open-services.net/ns/cm#"
+	xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+>
+	<rdf:Description rdf:type="http://localhost:5000/service/DeleteRuleAction">
+		<rdf:type rdf:resource="http://open-services.net/ns/cm#ChangeRequest"/>
+		<ns2:ruleId>RULE_ID</ns2:ruleId>
+	</rdf:Description>
+</rdf:RDF>
