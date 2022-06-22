@@ -1,36 +1,39 @@
 # Stackstorm OSLC Adapter
 
-Trabajo Fin de Master: Design and implementation of a monitoring framework for a DevOps life-cycle based on semantic techniques and the OSLC standard.
+***Trabajo Fin de Master: Design and implementation of a monitoring framework for a DevOps life-cycle based on semantic techniques and the OSLC standard.***
 
 La idea de este proyecto es diseñar y desarrollar un framework de monitorización de Stackstorm mediante la estandarización semántica con OSLC. Se podrá interactuar con el Graph Manager del adaptador mediante peticiones HTTP a los endpoints de /views.py y se podrá ver el modelado semántico, siguiendo los requisitos del CORE de OSLC, que se ha realizado de las reglas de Stackstorm. Por otro lado se pretende desarrollar un framework de integración de herramientas DevOps basado en eventos y acciones mediante el uso de Kafka para comunicación descentralizada. 
 
-Para cada acción producida en las reglas de Stackstorm, el adaptador generará un grafo del tipo OSLC Event y se almacenará en Kafka bajo un topic. El resto de herramientas DevOps que tengan su propio adaptador OSLC podrán suscribirse a este topic para realizar OSLC Actions de manera automatizada. Esto último queda fuera de los márgenes del proyecto y se enmarca dentro de SmartDevOps. 
+Para cada acción producida en las reglas de Stackstorm, el adaptador generará un grafo del tipo OSLC Event y se almacenará en Kafka bajo un topic. El resto de herramientas DevOps que tengan su propio adaptador OSLC podrán suscribirse a este topic para realizar OSLC Actions de manera automatizada. 
+
+Esto último queda fuera de los márgenes del trabajo.
 
 ## Arquitecture
 
 
-- Stackstorm y Kafka:
+#### Stackstorm y Kafka:
 
-Script de bash para la inicialización de un ReplicaSet de MongoDB, añadiendo dos nodos secundarios al despliegue inicial de stackstorm en Docker. Por otro lado se ha incluido en el mismo docker-compose los servicios de Kafka y Zookeeper.
+Script de bash para la inicialización de un ReplicaSet de MongoDB, añadiendo dos nodos secundarios al despliegue inicial de Stackstorm en Docker. Por otro lado se ha incluido en el mismo docker-compose los servicios de Kafka y Zookeeper.
 
-- Módulo de monitorización
+#### Módulo de monitorización
 
-Archivo de Python que utiliza los change_stream de MongoDB para la monitorización activa de Stackstorm.
+Archivo de Python que utiliza los *change_stream* de MongoDB para la monitorización activa de Stackstorm.
 
-- Graph Manager
+#### Graph Manager
 
-Servidor flask estructurado con cookiecutter. Contiene en su archivo views.py todos los endpoints que recibirán HTTP requests para una función u otra. 
+Servidor flask estructurado con Cookiecutter. Contiene en su archivo views.py todos los endpoints que recibirán HTTP requests para una función u otra. 
 
 ## Previous steps
 
-- Stackstorm y Kafka:
+#### Stackstorm y Kafka:
 
-Primero hay que clonar el repositorio de Stackstorm para Docker [st2-docker](https://github.com/StackStorm/st2-docker). Una vez clonado, sustituir el docker-compose.yml del repositorio clonado, por el de la carpeta st2-docker-changes/.
+Primero hay que clonar el repositorio de Stackstorm para Docker [st2-docker](https://github.com/StackStorm/st2-docker). Una vez clonado, sustituir el docker-compose.yml del repositorio clonado, por el de la carpeta **st2-docker-changes/.**
 
 Dentro de st2-docker-changes habrá dos scripts:
 
-- start-st2.sh: Se encarga de levantar el escenario formado por un cluster replicaset con un nodo primario y dos secundarios, así como los servicios de zookeeper y kafka. Copiar este archivo en la raiz del repo st2-docker recientemente clonado.
-- rs-init.sh: Se ejecuta el iniciar el contenedor y permite la creacion del cluster replicaset de MongoDB. Copiar este script en la carpeta st2-docker/mongo/rs-init.sh.
+- **start-st2.sh**: Se encarga de levantar el escenario formado por un cluster replicaset con un nodo primario y dos secundarios, así como los servicios de zookeeper y kafka. Copiar este archivo en la raiz del repo st2-docker recientemente clonado.
+- **rs-init.sh**: Se ejecuta el iniciar el contenedor y permite la creacion del cluster replicaset de MongoDB. Copiar este script en la carpeta *st2-docker/mongo/rs-init.sh*.
+
 
 ## Deploy and Test
 
@@ -74,8 +77,11 @@ Headers:
 - [Stackstorm-API](https://api.stackstorm.com/)
 - [SmartDevOps](https://smartdevops.gsi.upm.es)
 - [GSI](https://gsi.upm.es)
+- [Taiger](https://taiger.com)
 
 ## Project framework
 
-Este trabajo se enmarca dentro del proyecto [SmartDevOps](https://smartdevops.gsi.upm.es) y pretende servir de demo para un caso de uso concreto. SmartDevOps desarrolla de manera mucho mas global los conceptos planteados en este trabajo.
-Todas las métricas sociales del proyecto se pueden encontrar en el siguiente [Dashboard](https://dashboard-smartdevops.gsi.upm.es)
+Este trabajo se enmarca dentro del proyecto [SmartDevOps](https://smartdevops.gsi.upm.es), del [Grupo de Sistemas Inteligentes](https://gsi.upm.es) (UPM) y [Taiger](https://taiger.com). Pretende servir de demo para un caso de uso concreto. 
+
+[SmartDevOps](https://smartdevops.gsi.upm.es) desarrolla de manera mucho mas global los conceptos planteados en este trabajo.
+
