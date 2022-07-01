@@ -13,7 +13,7 @@ Esto último queda fuera de los márgenes del trabajo.
 
 #### Stackstorm y Kafka:
 
-Script de bash para la inicialización de un ReplicaSet de MongoDB, añadiendo dos nodos secundarios al despliegue inicial de Stackstorm en Docker. Por otro lado se ha incluido en el mismo docker-compose los servicios de Kafka y Zookeeper.
+Script de bash para la inicialización de un ReplicaSet de MongoDB, añadiendo dos nodos secundarios al despliegue inicial de Stackstorm en Docker. Por otro lado se ha incluido en el mismo docker-compose los servicios de Kafka y Zookeeper. La idea del docker-compose es que sea capaz de desplegar tanto el replicaset de MongoDB, como Kafka y Zookeeper, como Stackstorm.
 
 #### Módulo de monitorización
 
@@ -44,6 +44,26 @@ Se puede iniciar todo el escenario, modificando paths y variables a su caso de u
 ```
 
 Con este script se arrancan los 3 procesos: Despliegue de escenario de Stackstorm y Kafka, inicio del proceso del módulo de monitorización e inicio del graph manager del adaptador Stackstorm-OSLC.
+
+## Docker and Kubernetes Deploy
+
+Se ha desplegado en Kubernetes desplegando la imagen utilizando el Registry privado de Gitlab, pero el procedimiento sería el mismo si se quiere hacer de manera pública:
+
+
+```
+docker login
+docker build -t st2-oslc:<tag> .
+docker push st2-oslc:<tag>
+```
+
+En el archivo k8s/st2-oslc.py hay que modificar el archivo env-secret.yaml, donde estarán las variables de entorno que se crearan como un secreto de Kubernetes:
+
+```
+kubectl create -f env-secret.yaml 
+```
+
+Y se crean el resto de recursos, como el deployment, el servicio y el ingress si se quiere.
+
 
 ## Usage
 
