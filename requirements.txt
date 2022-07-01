@@ -17,3 +17,5 @@ requests
 st2client==3.2.0
 datetime
 kafka-python
+st2client
+pymongo
