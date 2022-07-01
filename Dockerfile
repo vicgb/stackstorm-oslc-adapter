@@ -18,5 +18,11 @@ RUN pip install -e .
 
 COPY oslcapi oslcapi/
 COPY migrations migrations/
+COPY st2api/ st2api/
+
 
 EXPOSE 5000
+
+WORKDIR oslcapi/
+
+CMD ["flask", "run", "-h", "0.0.0.0"]
