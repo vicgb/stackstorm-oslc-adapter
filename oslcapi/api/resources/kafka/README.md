@@ -1,0 +1,1 @@
+Archivo de prueba con un producer y un consumer con Kafka.

@@ -25,6 +25,9 @@ FUSEKI_USER = os.getenv("FUSEKI_USER")
 FUSEKI_PASSWORD = os.getenv("FUSEKI_PASSWORD")
 QUERY_FUSEKI_ENDPOINT = os.getenv("QUERY_FUSEKI_ENDPOINT")
 UPDATE_FUSEKI_ENDPOINT = os.getenv("UPDATE_FUSEKI_ENDPOINT")
+KAFKA_HOST = os.getenv("KAFKA_HOST")
+KAFKA_PORT = os.getenv("KAFKA_PORT")
+
 
 #Fuseki endpoints
 fuseki_store = sparqlstore.SPARQLUpdateStore(auth=(FUSEKI_USER,FUSEKI_PASSWORD))
@@ -43,7 +46,7 @@ OSLC = Namespace('http://open-services.net/ns/core#')
 
 # Kafka Producer
 kafka_producer = KafkaProducer(  
-    bootstrap_servers = ['localhost:29092'],  
+    bootstrap_servers = [KAFKA_HOST+':'+KAFKA_PORT],  
     value_serializer = lambda x:dumps(x).encode('utf-8')  
     ) 
 
