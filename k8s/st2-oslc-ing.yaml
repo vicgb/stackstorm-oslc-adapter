@@ -1,0 +1,19 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: st2-oslc-ingress
+  annotations:
+    #annotations
+    #...
+spec:
+  rules:
+  - host: <url>
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: st2-oslc
+            port:
+              number: 5000

@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: st2-oslc
+  labels:
+    app: st2-oslc
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: st2-oslc
+  template:
+    metadata:
+      labels:
+        app: st2-oslc
+    spec:
+      imagePullSecrets:
+      - name: <private_registry_gitlab>
+      containers:
+        - name: st2-oslc
+          image: <private_registry_gitlab_repo>
+          ports:
+            - containerPort: 5000
+              protocol: TCP
+            - containerPort: 5001
+              protocol: TCP
+             envFrom:
+             - secretRef:
+                name: env-secret
+            
+            
+
