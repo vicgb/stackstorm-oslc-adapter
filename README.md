@@ -10,6 +10,7 @@ Esto último queda fuera de los márgenes del trabajo.
 
 ## Arquitecture
 
+Todos los módulos que forman la arquitectura se pueden encontrar en assets/. 
 
 #### Stackstorm y Kafka:
 
@@ -17,7 +18,7 @@ Script de bash para la inicialización de un ReplicaSet de MongoDB, añadiendo d
 
 #### Módulo de monitorización
 
-Archivo de Python que utiliza los *change_stream* de MongoDB para la monitorización activa de Stackstorm.
+Archivo de Python que utiliza los *change_stream* de MongoDB para la monitorización activa de Stackstorm. 
 
 #### Graph Manager
 
