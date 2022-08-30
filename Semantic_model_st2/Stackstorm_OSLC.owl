@@ -1,0 +1,332 @@
+<?xml version="1.0"?>
+<Ontology xmlns="http://www.w3.org/2002/07/owl#"
+     xml:base="http://localhost:5001/Stackstorm_OSLC"
+     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+     xmlns:xml="http://www.w3.org/XML/1998/namespace"
+     xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+     ontologyIRI="http://localhost:5001/Stackstorm_OSLC"
+     versionIRI="http://localhost:5001/Stackstorm_OSLC/01">
+    <Prefix name="" IRI="http://localhost:5001/Stackstorm_OSLC"/>
+    <Prefix name="ns" IRI="http://www.w3.org/2003/06/sw-vocab-status/ns#"/>
+    <Prefix name="ldp" IRI="http://www.w3.org/ns/ldp#"/>
+    <Prefix name="owl" IRI="http://www.w3.org/2002/07/owl#"/>
+    <Prefix name="rdf" IRI="http://www.w3.org/1999/02/22-rdf-syntax-ns#"/>
+    <Prefix name="xml" IRI="http://www.w3.org/XML/1998/namespace"/>
+    <Prefix name="xsd" IRI="http://www.w3.org/2001/XMLSchema#"/>
+    <Prefix name="oslc" IRI="http://open-services.net/ns/core#"/>
+    <Prefix name="rdfs" IRI="http://www.w3.org/2000/01/rdf-schema#"/>
+    <Prefix name="vann" IRI="http://purl.org/vocab/vann/"/>
+    <Prefix name="terms" IRI="http://purl.org/dc/terms/"/>
+    <Prefix name="oslc_st2" IRI="http://localhost:5001/Stackstorm_OSLC/"/>
+    <Import>http://open-services.net/ns/auto#</Import>
+    <Import>http://open-services.net/ns/core#</Import>
+    <Import>urn:webprotege:ontology:f6f0882c-e4eb-4eba-b7ef-cec518168623</Import>
+    <Declaration>
+        <Class IRI="#CreateRuleAction"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#DeleteRuleAction"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Rule"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#RuleAction"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Stackstorm"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#UpdateRuleAction"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="http://open-services.net/ns/core"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="http://open-services.net/ns/actions#Action"/>
+    </Declaration>
+    <Declaration>
+        <Class abbreviatedIRI="oslc:AllowedValues"/>
+    </Declaration>
+    <Declaration>
+        <Class abbreviatedIRI="oslc:CreationFactory"/>
+    </Declaration>
+    <Declaration>
+        <Class abbreviatedIRI="oslc:Property"/>
+    </Declaration>
+    <Declaration>
+        <Class abbreviatedIRI="oslc:QueryCapability"/>
+    </Declaration>
+    <Declaration>
+        <Class abbreviatedIRI="oslc:ResourceShape"/>
+    </Declaration>
+    <Declaration>
+        <Class abbreviatedIRI="oslc:Service"/>
+    </Declaration>
+    <Declaration>
+        <Class abbreviatedIRI="oslc:ServiceProvider"/>
+    </Declaration>
+    <Declaration>
+        <Class abbreviatedIRI="oslc:ServiceProviderCatalog"/>
+    </Declaration>
+    <Declaration>
+        <Class abbreviatedIRI="rdf:Resource"/>
+    </Declaration>
+    <Declaration>
+        <Class abbreviatedIRI="ldp:BasicContainer"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#actionRef"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#ruleAction"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#ruleCreated"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#ruleDeleted"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#ruleEnabled"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#ruleId"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#ruleName"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#rulePack"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#ruleTitle"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#ruleTrigger"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#ruleUpdated"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#triggerRef"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#triggerType"/>
+    </Declaration>
+    <Declaration>
+        <AnnotationProperty IRI="/actionResult"/>
+    </Declaration>
+    <Declaration>
+        <AnnotationProperty abbreviatedIRI="oslc:allowedValue"/>
+    </Declaration>
+    <Declaration>
+        <AnnotationProperty abbreviatedIRI="oslc:allowedValues"/>
+    </Declaration>
+    <Declaration>
+        <AnnotationProperty abbreviatedIRI="oslc:creation"/>
+    </Declaration>
+    <Declaration>
+        <AnnotationProperty abbreviatedIRI="oslc:creationFactory"/>
+    </Declaration>
+    <Declaration>
+        <AnnotationProperty abbreviatedIRI="oslc:defaultValue"/>
+    </Declaration>
+    <Declaration>
+        <AnnotationProperty abbreviatedIRI="oslc:describes"/>
+    </Declaration>
+    <Declaration>
+        <AnnotationProperty abbreviatedIRI="oslc:details"/>
+    </Declaration>
+    <Declaration>
+        <AnnotationProperty abbreviatedIRI="oslc:domain"/>
+    </Declaration>
+    <Declaration>
+        <AnnotationProperty abbreviatedIRI="oslc:label"/>
+    </Declaration>
+    <Declaration>
+        <AnnotationProperty abbreviatedIRI="oslc:name"/>
+    </Declaration>
+    <Declaration>
+        <AnnotationProperty abbreviatedIRI="oslc:occurs"/>
+    </Declaration>
+    <Declaration>
+        <AnnotationProperty abbreviatedIRI="oslc:property"/>
+    </Declaration>
+    <Declaration>
+        <AnnotationProperty abbreviatedIRI="oslc:propertyDefinition"/>
+    </Declaration>
+    <Declaration>
+        <AnnotationProperty abbreviatedIRI="oslc:queryBase"/>
+    </Declaration>
+    <Declaration>
+        <AnnotationProperty abbreviatedIRI="oslc:queryCapability"/>
+    </Declaration>
+    <Declaration>
+        <AnnotationProperty abbreviatedIRI="oslc:resourceShape"/>
+    </Declaration>
+    <Declaration>
+        <AnnotationProperty abbreviatedIRI="oslc:resourceType"/>
+    </Declaration>
+    <Declaration>
+        <AnnotationProperty abbreviatedIRI="oslc:service"/>
+    </Declaration>
+    <Declaration>
+        <AnnotationProperty abbreviatedIRI="oslc:serviceProvider"/>
+    </Declaration>
+    <Declaration>
+        <AnnotationProperty abbreviatedIRI="terms:description"/>
+    </Declaration>
+    <Declaration>
+        <AnnotationProperty abbreviatedIRI="terms:title"/>
+    </Declaration>
+    <Declaration>
+        <AnnotationProperty abbreviatedIRI="rdf:type"/>
+    </Declaration>
+    <SubClassOf>
+        <Class IRI="#CreateRuleAction"/>
+        <Class IRI="#RuleAction"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#DeleteRuleAction"/>
+        <Class IRI="#RuleAction"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Rule"/>
+        <Class IRI="http://open-services.net/ns/auto#AutomationPlan"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#RuleAction"/>
+        <Class IRI="http://open-services.net/ns/actions#Action"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Stackstorm"/>
+        <Class abbreviatedIRI="oslc:ServiceProvider"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#UpdateRuleAction"/>
+        <Class IRI="#RuleAction"/>
+    </SubClassOf>
+    <SubDataPropertyOf>
+        <DataProperty IRI="#actionRef"/>
+        <DataProperty IRI="#ruleAction"/>
+    </SubDataPropertyOf>
+    <SubDataPropertyOf>
+        <DataProperty IRI="#triggerRef"/>
+        <DataProperty IRI="#ruleTrigger"/>
+    </SubDataPropertyOf>
+    <SubDataPropertyOf>
+        <DataProperty IRI="#triggerType"/>
+        <DataProperty IRI="#ruleTrigger"/>
+    </SubDataPropertyOf>
+    <DataPropertyDomain>
+        <DataProperty IRI="#ruleAction"/>
+        <Class IRI="#Rule"/>
+    </DataPropertyDomain>
+    <DataPropertyDomain>
+        <DataProperty IRI="#ruleCreated"/>
+        <Class IRI="#Rule"/>
+    </DataPropertyDomain>
+    <DataPropertyDomain>
+        <DataProperty IRI="#ruleEnabled"/>
+        <Class IRI="#Rule"/>
+    </DataPropertyDomain>
+    <DataPropertyDomain>
+        <DataProperty IRI="#ruleId"/>
+        <Class IRI="#Rule"/>
+    </DataPropertyDomain>
+    <DataPropertyDomain>
+        <DataProperty IRI="#ruleName"/>
+        <Class IRI="#Rule"/>
+    </DataPropertyDomain>
+    <DataPropertyDomain>
+        <DataProperty IRI="#rulePack"/>
+        <Class IRI="#Rule"/>
+    </DataPropertyDomain>
+    <DataPropertyDomain>
+        <DataProperty IRI="#ruleTitle"/>
+        <Class IRI="#Rule"/>
+    </DataPropertyDomain>
+    <DataPropertyDomain>
+        <DataProperty IRI="#ruleTrigger"/>
+        <Class IRI="#Rule"/>
+    </DataPropertyDomain>
+    <DataPropertyDomain>
+        <DataProperty IRI="#ruleUpdated"/>
+        <Class IRI="#Rule"/>
+    </DataPropertyDomain>
+    <DataPropertyRange>
+        <DataProperty IRI="#actionRef"/>
+        <Datatype abbreviatedIRI="xsd:string"/>
+    </DataPropertyRange>
+    <DataPropertyRange>
+        <DataProperty IRI="#ruleAction"/>
+        <Datatype abbreviatedIRI="xsd:string"/>
+    </DataPropertyRange>
+    <DataPropertyRange>
+        <DataProperty IRI="#ruleCreated"/>
+        <Datatype abbreviatedIRI="xsd:boolean"/>
+    </DataPropertyRange>
+    <DataPropertyRange>
+        <DataProperty IRI="#ruleDeleted"/>
+        <Datatype abbreviatedIRI="xsd:boolean"/>
+    </DataPropertyRange>
+    <DataPropertyRange>
+        <DataProperty IRI="#ruleEnabled"/>
+        <Datatype abbreviatedIRI="xsd:boolean"/>
+    </DataPropertyRange>
+    <DataPropertyRange>
+        <DataProperty IRI="#ruleId"/>
+        <Datatype abbreviatedIRI="xsd:token"/>
+    </DataPropertyRange>
+    <DataPropertyRange>
+        <DataProperty IRI="#ruleName"/>
+        <Datatype abbreviatedIRI="xsd:string"/>
+    </DataPropertyRange>
+    <DataPropertyRange>
+        <DataProperty IRI="#rulePack"/>
+        <Datatype abbreviatedIRI="xsd:string"/>
+    </DataPropertyRange>
+    <DataPropertyRange>
+        <DataProperty IRI="#ruleTitle"/>
+        <Datatype abbreviatedIRI="xsd:string"/>
+    </DataPropertyRange>
+    <DataPropertyRange>
+        <DataProperty IRI="#ruleUpdated"/>
+        <Datatype abbreviatedIRI="xsd:boolean"/>
+    </DataPropertyRange>
+    <DataPropertyRange>
+        <DataProperty IRI="#triggerRef"/>
+        <Datatype abbreviatedIRI="xsd:string"/>
+    </DataPropertyRange>
+    <DataPropertyRange>
+        <DataProperty IRI="#triggerType"/>
+        <Datatype abbreviatedIRI="xsd:string"/>
+    </DataPropertyRange>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
+        <IRI>#ruleAction</IRI>
+        <Literal>Action to be performed by a rule</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
+        <IRI>#ruleId</IRI>
+        <Literal>Rule ID assigned randomly by Stackstorm</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
+        <IRI>#ruleName</IRI>
+        <Literal>Name to identify a StackStorm rule</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
+        <IRI>#ruleTrigger</IRI>
+        <Literal>Definition of the trigger that will lead to the execution of a rule in Stackstorm</Literal>
+    </AnnotationAssertion>
+</Ontology>
+
+
+
+<!-- Generated by the OWL API (version 4.5.9.2019-02-01T07:24:44Z) https://github.com/owlcs/owlapi -->
+
