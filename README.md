@@ -2,27 +2,33 @@
 
 ***Trabajo Fin de Master: Design and implementation of a monitoring framework for a DevOps life-cycle based on semantic techniques and the OSLC standard.***
 
-La idea de este proyecto es diseñar y desarrollar un framework de monitorización de Stackstorm mediante la estandarización semántica con OSLC. Se podrá interactuar con el Graph Manager del adaptador mediante peticiones HTTP a los endpoints de /views.py y se podrá ver el modelado semántico, siguiendo los requisitos del CORE de OSLC, que se ha realizado de las reglas de Stackstorm. Por otro lado se pretende desarrollar un framework de integración de herramientas DevOps basado en eventos y acciones mediante el uso de Kafka para comunicación descentralizada. 
+El adaptador Stackstorm-OSLC tiene dos partes fundamentales: 
 
-Para cada acción producida en las reglas de Stackstorm, el adaptador generará un grafo del tipo OSLC Event y se almacenará en Kafka bajo un topic. El resto de herramientas DevOps que tengan su propio adaptador OSLC podrán suscribirse a este topic para realizar OSLC Actions de manera automatizada. 
+- La primera idea es diseñar y desarrollar un framework de monitorización, basado en el estandar semántico OSLC, para las reglas de Stackstorm. Para ello se hará uso de OSLC Actions y OSLC Events (desarrollados bajo el marco del proyecto [SmartDevOps](https://smartdevops.gsi.upm.es)). Este framework será capaz de detectar cambios en las reglas (activación/desactivación, modificación y eliminación) y generar OSLC Events de manera automática. Estos eventos se enviarán a una instancia de Kafka para comunicación descentralizada.
 
-Esto último queda fuera de los márgenes del trabajo.
+- Por otro lado se pretende desarrollar un caso de uso concreto de un framework de integración de herramientas DevOps basado en eventos y acciones OSLC mediante el uso de Kafka. En este proyecto, el funcionamiento consiste en que para cada cambio producido en las reglas de Stackstorm (y detectado por el modulo de monitorización), el adaptador OSLC generará un grafo del tipo OSLC Event y se almacenará en Kafka bajo un topic. Una vez almacenado bajo el topic, otra herramienta (que tenga su respectivo adaptador OSLC) será capaz de suscribirse a ese topic y generar OSLC Actions de manera automática, ante cambios en las reglas de Stackstorm. De esta manera se construye un entorno automático de integración de herramientas DevOps basado en eventos y acciones OSLC.
 
-## Arquitecture
+Un diagrama general del adaptador stackstorm-OSLC sería:
+
+![Image text](https://github.com/vicgb/stackstorm-oslc-adapter/blob/main/assets/diagrama_general.png)
 
 Todos los módulos que forman la arquitectura se pueden encontrar en assets/. 
 
+## Description
 #### Stackstorm y Kafka:
 
 Script de bash para la inicialización de un ReplicaSet de MongoDB, añadiendo dos nodos secundarios al despliegue inicial de Stackstorm en Docker. Por otro lado se ha incluido en el mismo docker-compose los servicios de Kafka y Zookeeper. La idea del docker-compose es que sea capaz de desplegar tanto el replicaset de MongoDB, como Kafka y Zookeeper, como Stackstorm.
 
 #### Módulo de monitorización
 
-Archivo de Python que utiliza los *change_stream* de MongoDB para la monitorización activa de Stackstorm. 
+Archivo de Python que utiliza los *change_stream* de MongoDB para la monitorización activa de Stackstorm. Es el módulo encargado de detectar cuando hay un cambio en alguna de las reglas de Stackstorm y generar un OSLC Event para enviarlo de manera automática a Kafka bajo el topic 'st2_event'. Se trata de un módulo de monitorización activa, es decir, no requiere de peticiones periódicas al endpoint de Stackstorm en busca de cambios si no que espera a recibir activamente los cambios producidos, en cuanto se producen.
 
 #### Graph Manager
 
-Servidor flask estructurado con Cookiecutter. Contiene en su archivo views.py todos los endpoints que recibirán HTTP requests para una función u otra. 
+Servidor flask estructurado con Cookiecutter. Contiene en su archivo views.py todos los endpoints que recibirán HTTP requests para una función u otra. Estos endpoints podran recibir HTTP requests, llamarán a una determinada función y devolveran un grafo RDF con la respuesta. 
+
+Por ejemplo, se puede consultar cuántas reglas hay en la instancia de Stackstorm mediante un HTTP GET a */serviceProviders/<int:service_provider_id>/changeRequests*. 
+
 
 ## Previous steps
 
